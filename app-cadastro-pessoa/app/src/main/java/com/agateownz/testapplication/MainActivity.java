@@ -43,7 +43,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(this, ActivityCadastroPessoas.class);
-        finish();
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        pessoaAdapter = new PessoaAdapter(this, pessoaRepository.getAll());
+        listViewPessoas.setAdapter(pessoaAdapter);
     }
 }
