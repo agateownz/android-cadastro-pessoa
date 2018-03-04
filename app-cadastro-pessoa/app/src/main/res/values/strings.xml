@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Cadastro de Pessoas</string>
+    <string name="lbl_nome">Nome</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_telefone">Telefone</string>
+    <string name="lbl_endereco">Endereço</string>
+    <string name="lbl_observacoes">Observações</string>
+    <string name="lbl_adicionar_pessoa">Adicionar Pessoa</string>
+    <string name="lbl_data_nasc">Data de Nascimento</string>
+
+
+    <string name="lbl_menu_salvar">Salvar</string>
+    <string name="lbl_menu_alterar">Alterar</string>
+    <string name="lbl_menu_excluir">Excluir</string>
+</resources>
