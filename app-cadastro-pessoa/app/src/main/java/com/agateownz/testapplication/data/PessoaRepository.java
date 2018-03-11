@@ -14,7 +14,7 @@ import java.util.List;
  * Created by luisg on 04/03/2018.
  */
 
-public class PessoaRepository implements IRepository<Pessoa, Long> {
+public class PessoaRepository implements IPessoaRepository {
     private static final String TABLE_NAME = "pessoa";
     private static final String KEY_ID = "id";
     private static final String KEY_NOME = "nome";
@@ -93,7 +93,7 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
 
         if (cursor != null) {
             cursor.moveToFirst();
-        } else {
+
             pessoa = new Pessoa();
             pessoa.setId(Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID))));
             pessoa.setNome(cursor.getString(cursor.getColumnIndex(KEY_NOME)));
@@ -102,8 +102,9 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
             pessoa.setEndereco(cursor.getString(cursor.getColumnIndex(KEY_ENDERECO)));
             pessoa.setObservacao(cursor.getString(cursor.getColumnIndex(KEY_OBSERVACAO)));
             pessoa.setDataNascimento(cursor.getLong(cursor.getColumnIndex(KEY_DATA_NASC)));
+
+            cursor.close();
         }
-        cursor.close();
         db.close();
         return pessoa;
     }
@@ -133,5 +134,58 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
         cursor.close();
         db.close();
         return pessoas;
+    }
+
+    @Override
+    public List<String> getAllNames() {
+        List<String> nomes = new ArrayList<>();
+
+        String query = "SELECT " + KEY_NOME + " FROM " + TABLE_NAME;
+
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                nomes.add(cursor.getString(cursor.getColumnIndex(KEY_NOME)));
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return nomes;
+    }
+
+    @Override
+    public Pessoa getByName(String nome) {
+        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
+        Pessoa pessoa = null;
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                COLUMNS,
+                " nome = ?",
+                new String[] { nome },
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+
+            pessoa = new Pessoa();
+            pessoa.setId(Long.parseLong(cursor.getString(cursor.getColumnIndex(KEY_ID))));
+            pessoa.setNome(cursor.getString(cursor.getColumnIndex(KEY_NOME)));
+            pessoa.setEmail(cursor.getString(cursor.getColumnIndex(KEY_EMAIL)));
+            pessoa.setTelefone(cursor.getString(cursor.getColumnIndex(KEY_TELEFONE)));
+            pessoa.setEndereco(cursor.getString(cursor.getColumnIndex(KEY_ENDERECO)));
+            pessoa.setObservacao(cursor.getString(cursor.getColumnIndex(KEY_OBSERVACAO)));
+            pessoa.setDataNascimento(cursor.getLong(cursor.getColumnIndex(KEY_DATA_NASC)));
+
+            cursor.close();
+        }
+
+        db.close();
+        return pessoa;
     }
 }

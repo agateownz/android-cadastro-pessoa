@@ -38,23 +38,28 @@ public class ActivityDetalhesPessoa extends AppCompatActivity implements Dialog.
 
         pessoaRepository = new PessoaRepository(this);
         pessoa = (Pessoa)getIntent().getSerializableExtra("pessoa");
+        if (pessoa != null) {
+            txtNome = (TextView)findViewById(R.id.lbl_pessoa_nome);
+            txtEmail = (TextView)findViewById(R.id.lbl_pessoa_email);
+            txtTelefone = (TextView)findViewById(R.id.lbl_pessoa_telefone);
+            txtEndereco = (TextView)findViewById(R.id.lbl_pessoa_endereco);
+            txtObservacoes = (TextView)findViewById(R.id.lbl_pessoa_observacoes);
+            txtDataNascimento = (TextView)findViewById(R.id.lbl_pessoa_data_nasc);
 
-        txtNome = (TextView)findViewById(R.id.lbl_pessoa_nome);
-        txtEmail = (TextView)findViewById(R.id.lbl_pessoa_email);
-        txtTelefone = (TextView)findViewById(R.id.lbl_pessoa_telefone);
-        txtEndereco = (TextView)findViewById(R.id.lbl_pessoa_endereco);
-        txtObservacoes = (TextView)findViewById(R.id.lbl_pessoa_observacoes);
-        txtDataNascimento = (TextView)findViewById(R.id.lbl_pessoa_data_nasc);
-
-        txtNome.setText(pessoa.getNome());
-        txtEmail.setText(pessoa.getEmail());
-        txtTelefone.setText(pessoa.getTelefone());
-        txtEndereco.setText(pessoa.getEndereco());
-        txtObservacoes.setText(pessoa.getObservacao());
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(pessoa.getDataNascimento());
-        final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
-        txtDataNascimento.setText(dateFormat.format(calendar.getTime()));
+            txtNome.setText(pessoa.getNome());
+            txtEmail.setText(pessoa.getEmail());
+            txtTelefone.setText(pessoa.getTelefone());
+            txtEndereco.setText(pessoa.getEndereco());
+            txtObservacoes.setText(pessoa.getObservacao());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(pessoa.getDataNascimento());
+            final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM);
+            txtDataNascimento.setText(dateFormat.format(calendar.getTime()));
+        } else {
+            Toast.makeText(this, "Não foi possível exibir os detalhes da pessoa selecionada.",
+                    Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override

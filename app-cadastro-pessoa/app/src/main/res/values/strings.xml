@@ -12,4 +12,5 @@
     <string name="lbl_menu_salvar">Salvar</string>
     <string name="lbl_menu_alterar">Alterar</string>
     <string name="lbl_menu_excluir">Excluir</string>
+    <string name="lbl_dica_busca">Digite o nome de uma pessoa</string>
 </resources>
