@@ -17,7 +17,7 @@
             android:id="@+id/lbl_desc_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/lbl_nome"
             android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:id="@+id/lbl_desc_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/lbl_email"
             android:textStyle="bold" />
 
@@ -59,7 +59,7 @@
             android:id="@+id/lbl_desc_telefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/lbl_telefone"
             android:textStyle="bold" />
 
@@ -81,7 +81,7 @@
             android:id="@+id/lbl_desc_endereco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/lbl_endereco"
             android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
             android:id="@+id/lbl_desc_observacoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/lbl_observacoes"
             android:textStyle="bold" />
 
@@ -125,7 +125,7 @@
             android:id="@+id/lbl_desc_data_nasc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:text="@string/lbl_data_nasc"
             android:textStyle="bold" />
 

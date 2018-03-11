@@ -13,10 +13,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.agateownz.testapplication.R;
 import com.agateownz.testapplication.data.PessoaRepository;
 import com.agateownz.testapplication.model.Pessoa;
+import com.agateownz.testapplication.model.PessoaException;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -109,8 +111,11 @@ public class ActivityCadastroPessoas extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_salvar:
-                pessoaRepository.saveOrUpdate(parsePessoaFromView());
-                finish();
+                Pessoa pessoa = parsePessoaFromView();
+                if (pessoa != null) {
+                    pessoaRepository.saveOrUpdate(pessoa);
+                    finish();
+                }
                 return true;
 
             default:
@@ -133,8 +138,18 @@ public class ActivityCadastroPessoas extends AppCompatActivity
         pessoa.setEndereco(txtEndereco.getText().toString());
         pessoa.setTelefone(txtTelefone.getText().toString());
         pessoa.setObservacao(txtObservacoes.getText().toString());
-        pessoa.setDataNascimento(currentCalendar.getTimeInMillis());
 
+        if (currentCalendar != null) {
+            pessoa.setDataNascimento(currentCalendar.getTimeInMillis());
+        }
+
+        try {
+            pessoa.validar();
+        } catch (PessoaException e) {
+            e.printStackTrace();
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            return null;
+        }
         return pessoa;
     }
 

@@ -17,6 +17,11 @@ public class Pessoa implements Serializable {
     private Long dataNascimento;
 
     public Pessoa() {
+        nome = "";
+        email = "";
+        telefone = "";
+        endereco = "";
+        observacao = "";
     }
 
     public Pessoa(String nome, String email, String telefone) {
@@ -80,5 +85,31 @@ public class Pessoa implements Serializable {
 
     public void setDataNascimento(Long dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public void validar() throws PessoaException {
+        if ("".equals(nome)) {
+            throw new PessoaException("O nome é obrigatório.");
+        }
+
+        if ("".equals(email)) {
+            throw new PessoaException("O email é obrigatório.");
+        }
+
+        if (email != null && !email.contains("@")) {
+            throw new PessoaException("O email informado é inválido.");
+        }
+
+        if ("".equals(telefone)) {
+            throw new PessoaException("O telefone é obrigatório.");
+        }
+
+        if ("".equals(endereco)) {
+            throw new PessoaException("O endereço é obrigatório.");
+        }
+
+        if (dataNascimento == null) {
+            throw new PessoaException("A data de nascimento é obrigatória.");
+        }
     }
 }
