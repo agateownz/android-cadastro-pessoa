@@ -1,4 +1,4 @@
-package com.agateownz.testapplication;
+package com.agateownz.testapplication.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.agateownz.testapplication.R;
 import com.agateownz.testapplication.model.Pessoa;
 
 import java.util.List;

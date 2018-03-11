@@ -1,20 +1,20 @@
-package com.agateownz.testapplication;
+package com.agateownz.testapplication.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import com.agateownz.testapplication.adapters.PessoaAdapter;
+import com.agateownz.testapplication.R;
 import com.agateownz.testapplication.data.PessoaRepository;
 import com.agateownz.testapplication.model.Pessoa;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ListView.OnItemClickListener {
 
     private ImageButton btn_adicionar;
     private EditText txt_pesquisar;
@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         pessoaAdapter = new PessoaAdapter(this, pessoaRepository.getAll());
         listViewPessoas.setAdapter(pessoaAdapter);
+
+        listViewPessoas.setOnItemClickListener(this);
     }
 
     @Override
@@ -51,5 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         pessoaAdapter = new PessoaAdapter(this, pessoaRepository.getAll());
         listViewPessoas.setAdapter(pessoaAdapter);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Pessoa pessoa = (Pessoa)adapterView.getItemAtPosition(i);
+        Intent intent = new Intent(this, ActivityDetalhesPessoa.class);
+        intent.putExtra("pessoa", pessoa);
+        startActivity(intent);
     }
 }

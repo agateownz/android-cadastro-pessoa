@@ -1,7 +1,8 @@
-package com.agateownz.testapplication;
+package com.agateownz.testapplication.utility;
 
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.agateownz.testapplication.data.SQLiteDatabaseHelper;
 import com.clough.android.androiddbviewer.ADBVApplication;
 
 /**

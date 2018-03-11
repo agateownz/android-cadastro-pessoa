@@ -1,4 +1,4 @@
-package com.agateownz.testapplication;
+package com.agateownz.testapplication.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private static final String DB_NOME = "teste_application.db";
 
@@ -26,13 +26,14 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
             "email VARCHAR(128) NOT NULL,\n" +
             "telefone VARCHAR(60) NOT NULL,\n" +
             "endereco VARCHAR(128) NOT NULL,\n" +
-            "observacoes VARCHAR(128) NOT NULL\n" +
+            "observacoes VARCHAR(128) NOT NULL,\n" +
+            "data_nasc INTEGER" +
             ")"
         );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+        System.out.println(i);
     }
 }

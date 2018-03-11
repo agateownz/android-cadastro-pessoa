@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.agateownz.testapplication.SQLiteDatabaseHelper;
 import com.agateownz.testapplication.model.Pessoa;
 
 import java.util.ArrayList;
@@ -23,8 +22,9 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
     private static final String KEY_TELEFONE = "telefone";
     private static final String KEY_ENDERECO = "endereco";
     private static final String KEY_OBSERVACAO = "observacoes";
+    private static final String KEY_DATA_NASC = "data_nasc";
     private static final String[] COLUMNS = {
-        KEY_ID, KEY_NOME, KEY_EMAIL, KEY_TELEFONE, KEY_ENDERECO, KEY_OBSERVACAO
+        KEY_ID, KEY_NOME, KEY_EMAIL, KEY_TELEFONE, KEY_ENDERECO, KEY_OBSERVACAO, KEY_DATA_NASC
     };
 
     private SQLiteDatabaseHelper dbHelper;
@@ -51,6 +51,7 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
         values.put(KEY_ENDERECO, pessoa.getEndereco());
         values.put(KEY_TELEFONE, pessoa.getTelefone());
         values.put(KEY_OBSERVACAO, pessoa.getObservacao());
+        values.put(KEY_DATA_NASC, pessoa.getDataNascimento());
         db.update(TABLE_NAME, values, "id = ?", new String[] { String.valueOf(pessoa.getId())});
         db.close();
     }
@@ -63,6 +64,7 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
         values.put(KEY_ENDERECO, pessoa.getEndereco());
         values.put(KEY_TELEFONE, pessoa.getTelefone());
         values.put(KEY_OBSERVACAO, pessoa.getObservacao());
+        values.put(KEY_DATA_NASC, pessoa.getDataNascimento());
         long entityId = db.insert(TABLE_NAME, null, values);
         pessoa.setId(entityId);
         db.close();
@@ -99,6 +101,7 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
             pessoa.setTelefone(cursor.getString(cursor.getColumnIndex(KEY_TELEFONE)));
             pessoa.setEndereco(cursor.getString(cursor.getColumnIndex(KEY_ENDERECO)));
             pessoa.setObservacao(cursor.getString(cursor.getColumnIndex(KEY_OBSERVACAO)));
+            pessoa.setDataNascimento(cursor.getLong(cursor.getColumnIndex(KEY_DATA_NASC)));
         }
         cursor.close();
         db.close();
@@ -122,6 +125,7 @@ public class PessoaRepository implements IRepository<Pessoa, Long> {
                 pessoa.setTelefone(cursor.getString(cursor.getColumnIndex(KEY_TELEFONE)));
                 pessoa.setEndereco(cursor.getString(cursor.getColumnIndex(KEY_ENDERECO)));
                 pessoa.setObservacao(cursor.getString(cursor.getColumnIndex(KEY_OBSERVACAO)));
+                pessoa.setDataNascimento(cursor.getLong(cursor.getColumnIndex(KEY_DATA_NASC)));
                 pessoas.add(pessoa);
             } while (cursor.moveToNext());
         }

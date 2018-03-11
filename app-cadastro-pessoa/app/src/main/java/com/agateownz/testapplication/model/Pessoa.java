@@ -1,10 +1,12 @@
 package com.agateownz.testapplication.model;
 
+import java.io.Serializable;
+
 /**
  * Created by luisg on 04/03/2018.
  */
 
-public class Pessoa {
+public class Pessoa implements Serializable {
 
     private Long id;
     private String nome;
@@ -12,6 +14,7 @@ public class Pessoa {
     private String telefone;
     private String endereco;
     private String observacao;
+    private Long dataNascimento;
 
     public Pessoa() {
     }
@@ -71,4 +74,11 @@ public class Pessoa {
         this.observacao = observacao;
     }
 
+    public Long getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Long dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 }
